@@ -39,15 +39,17 @@
     
     </script>
     <script>
-
-var klikniec = 0;
 var map;
-var markers = [];
 var accidentDialog = new AccidentDialog();
+var unitDialog = new UnitDialog();
+/**************/
+var CURRENT_ACCIDENT = null;
+/**************/
+
 function initMap() {
-  var mgr = new Manager();
+  //var mgr = new Manager();
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 50.0546501, lng: 19.96250153},
+    center: {lat: 50.0546501, lng: 19.90250153},
     zoom: 12,
     streetViewControl: false,
     scrollwheel: false,
@@ -61,6 +63,7 @@ function initMap() {
     zoomControl: false
 
   });
+  var mgr = new Manager(map);
   mgr.map = map;
   /*var marker = new google.maps.Marker({
     position: {lat: 50.0546501, lng: 19.96250153},
@@ -83,11 +86,11 @@ function initMap() {
   // This event listener will call addMarker() when the map is clicked.
 
   // Adds a marker at the center of the map.
-  var h1 = {lat: 50.0546501, lng: 19.96250153};
+  /*var h1 = {lat: 50.0546501, lng: 19.96250153};
   var h2 = {lat: 50.0646501, lng: 19.97250153};
 
   addMarker(h1);
-  addMarker(h2);
+  addMarker(h2); */
 
 
 }

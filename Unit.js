@@ -1,6 +1,7 @@
 //Unit.js
-function Unit(name, organization, x, y, skills = [], cars = []) {
+function Unit(name, organization, x, y, map, skills = [], cars = []) {
 	this.name = name;
+	this.map = map;
 	this.organization = organization;
 	this.energy = 100;
 	this.skills = skills;
@@ -8,6 +9,7 @@ function Unit(name, organization, x, y, skills = [], cars = []) {
 	this.x = x;
 	this.y = y;
 	this.timer = 0;
+	this.marker = null
 }
 
 Unit.prototype.update = function(dt) {
@@ -19,3 +21,18 @@ Unit.prototype.update = function(dt) {
 			this.energy = 100;
 	}
 };
+
+Unit.prototype.plot = function() {
+	var self = this;
+	this.marker = new google.maps.Marker({
+	    position: {lat: self.x, lng: self.y},
+	    map: self.map,
+	    title: self.name,
+	    icon: "assets\\gfx\\marker.png"
+  });
+
+	google.maps.event.addDomListener(this.marker, 'click', function() {
+		unitDialog.show(self)
+  });
+
+}

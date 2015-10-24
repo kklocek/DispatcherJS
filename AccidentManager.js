@@ -17,6 +17,7 @@ AccidentManager.prototype.makeAccident = function() {
   	var randomLng = (Math.floor(Math.random() * (lngMax - lngMin + 1)) + lngMin)/100000000;
 	var accident = new Accident(0, randomLat, randomLng,"", 0, map);
 	this.accidents.push(accident);
+	CURRENT_ACCIDENT = accident;
 	return accident;
 };
 

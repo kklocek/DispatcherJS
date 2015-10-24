@@ -1,7 +1,7 @@
 //samochod
 //	posiada rodzaj:
 //		techniczny/beczkowoz/medyczny
-function Car(type, weight, x, y, unit) {
+function Car(type, weight, unit) {
 	this.type = type;
 	//destiny - rodzaj przeznaczenia
 	//inaczej - techniczny/beczkowoz/medyczny
@@ -10,8 +10,10 @@ function Car(type, weight, x, y, unit) {
 	this.accident = null; //auto jest przypisane do danej akcji, null jesli jest wolne
 	this.unit = unit; //Referencja na jednostke
 	this.state = actionState.AVAILABLE;
-	this.x = x;
-	this.y = y;
+	this.x = unit.x;
+	this.y = unit.y;
+	//!
+	this.imagePath = 'assets/gfx/marker.png'
 }
 
 Car.prototype.getSpeedRate = function() {
