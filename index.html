@@ -25,7 +25,11 @@
       <!-- -->
       <button id="accidentDialogButton">OK!</button>
     </div>
-    <div id="unitDialog" style="display: none"></div>
+    <div id="unitDialog" style="display: none">
+      <!-- -->
+      <button id="unitDialogButton">OK!</button>
+    </div>
+
     <div id="reportDialog" style="display: none"></div>
     <div id="ui"><button type="button" id="phoneButton">PHONE!</button></div>
     
@@ -39,9 +43,9 @@
 var klikniec = 0;
 var map;
 var markers = [];
+var accidentDialog = new AccidentDialog();
 function initMap() {
   var mgr = new Manager();
-  var accidentDialog = new AccidentDialog();
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 50.0546501, lng: 19.96250153},
     zoom: 12

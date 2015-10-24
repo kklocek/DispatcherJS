@@ -22,9 +22,9 @@ AccidentManager.prototype.makeAccident = function() {
 AccidentManager.prototype.isReadyForNextAccident = function(level) {
 	//TODO: Generowanie losowo prawdopodobienstwa incydentu
 	var r = Math.floor(Math.random()*this.n);
-	if(r == 5)
+	if(r == 5 || r == 4)
 		return true;
-else 
+	else 
 		return false;
 };
 
