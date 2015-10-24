@@ -11,6 +11,8 @@ function AccidentDialog(){
 		self.closeDialog();
 	}
 
+	this.types = ["Fire", "Car accident", "Natural disaster", "Medical disaster"];
+
 	this.textContainer.appendChild(this.infoRow);
 	this.textContainer.appendChild(this.whereRow);
 	this.textContainer.appendChild(this.whatRow);
@@ -21,7 +23,7 @@ AccidentDialog.prototype.show = function(accident){
 	this.phoneButton.style.display = "none";
 	this.element.style.display = "block";
 	//Renderowanie elementow
-	this.whatRow.textContent = "WHAT: " + accident.type;
+	this.whatRow.textContent = "WHAT: " + this.mapType(accident.type);
 	this.whereRow.textContent = "WHERE: " + accident.x + " " + accident.y;
 	//infoRow...
 }
@@ -29,6 +31,10 @@ AccidentDialog.prototype.show = function(accident){
 AccidentDialog.prototype.closeDialog = function() {
 	this.element.style.display = "none";
 	this.phoneButton.style.display = "inline";
+}
+
+AccidentDialog.prototype.mapType = function(type) {
+	return this.types[type];
 }
 
 
