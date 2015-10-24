@@ -9,8 +9,9 @@ AccidentManager.prototype.makeAccident = function() {
 	return accident;
 };
 
-AccidentManager.prototype.isReadyForNextAccident = function() {
+AccidentManager.prototype.isReadyForNextAccident = function(level) {
 	//TODO: Generowanie losowo prawdopodobienstwa incydentu
+
 	return true;
 };
 
