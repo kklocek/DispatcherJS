@@ -1,5 +1,10 @@
 function AccidentManager() {
 	this.accidents = [];
+this.numbers =[]
+	this.n = 5;
+for (var i=0; i<this.n; i++){
+	this.numbers [i] = i+1;
+}
 }
 
 AccidentManager.prototype.makeAccident = function() {
@@ -11,7 +16,9 @@ AccidentManager.prototype.makeAccident = function() {
 
 AccidentManager.prototype.isReadyForNextAccident = function(level) {
 	//TODO: Generowanie losowo prawdopodobienstwa incydentu
-
+var r = Math.floor(Math.random()*this.n);
+if(r == 5)
 	return true;
+else return false;
 };
-
+}
