@@ -1,6 +1,9 @@
 var accidentState = {
 	WAITING_FOR_PHONE: 0,
-	WAITING_FOR_ACTION: 1
+	WAITING_FOR_ACTION: 1,
+	DOING: 2,
+	WAITING_FOR_REPORT: 3,
+	ENDED: 4
 };
 
 var ENERGY_RATE = 3;
@@ -25,3 +28,5 @@ var carWeights = {
 	MEDIUM: 2,
 	HEAVY: 1
 }
+
+var PROGRESS_RATE = 3;

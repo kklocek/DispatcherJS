@@ -18,7 +18,7 @@ function Manager() {
 
 Manager.prototype.work = function() {
 	
-	if(!this.endgame) {
+	if(!this.endgame && this.map != null) {
 //Animacje itd...
 		this.accidentManager.update();
 		

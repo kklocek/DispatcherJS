@@ -1,11 +1,11 @@
 //rodzaj zdarzenia
 function Accident(type, x, y, info, state) {
-	this.type = type; //TODO: Zrobic to
+	this.type = type; 
 	this.x = x;
 	this.y = y;
 	//TODO: Info, do it
 	this.info = info;
-	this.state = state; //TODO: enuma zrobic, albo inny obiekt na takie rzeczy
+	this.state = state; 
 	this.progress = 0;
 	this.cars = [];
 }
@@ -19,10 +19,13 @@ Accident.prototype.addCars = function(car) {
 }
 
 Accident.prototype.update = function() {
+	if(this.state == accidentState.DOING) {
 		var cars = this.cars.filter(function(el)	 {
 			return el.type == this.type.bind(this);
 
 		});
 		
-		progress += cars.length * PROGRESS_RATE;
+		this.progress += cars.length * PROGRESS_RATE;
+	}
+
 }
