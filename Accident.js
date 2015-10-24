@@ -17,3 +17,7 @@ Accident.prototype.plot = function() {
 Accident.prototype.addCars = function(car) {
 	this.cars.push(car);
 }
+
+Accident.prototype.update = function() {
+	
+}
