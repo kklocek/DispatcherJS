@@ -23,7 +23,7 @@
 
 
     <script>
-    var mgr = new Manager();
+    
     </script>
     <script>
 
@@ -31,10 +31,12 @@ var klikniec = 0;
 var map;
 var markers = [];
 function initMap() {
+  var mgr = new Manager();
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 50.0546501, lng: 19.96250153},
     zoom: 12
   });
+  mgr.map = map;
   /*var marker = new google.maps.Marker({
     position: {lat: 50.0546501, lng: 19.96250153},
     map: map,
