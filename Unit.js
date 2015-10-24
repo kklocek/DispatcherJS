@@ -20,6 +20,10 @@ Unit.prototype.update = function(dt) {
 		if(this.energy > 100)
 			this.energy = 100;
 	}
+
+	for(var i = 0; i < this.cars.length; i++) {
+		this.cars[i].update();
+	}
 };
 
 Unit.prototype.plot = function() {

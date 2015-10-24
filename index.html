@@ -42,6 +42,10 @@
 var map;
 var accidentDialog = new AccidentDialog();
 var unitDialog = new UnitDialog();
+var directionsService = null;
+var directionsDisplay = null;
+
+
 /**************/
 var CURRENT_ACCIDENT = null;
 /**************/
@@ -64,6 +68,9 @@ function initMap() {
 
   });
   var mgr = new Manager(map);
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  directionsDisplay.setMap(map);
+  directionsService = new google.maps.DirectionsService();
   mgr.map = map;
   /*var marker = new google.maps.Marker({
     position: {lat: 50.0546501, lng: 19.96250153},
@@ -152,7 +159,7 @@ function deleteMarkers() {
 
     </script>
     <script async defer
-      src="https://maps.googleapis.com/maps/api/js?callback=initMap">
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC74BSYv7d30sh5O5xdJpePbqoDh_mBpJA&callback=initMap">
     </script>
   </body>
 </html>
