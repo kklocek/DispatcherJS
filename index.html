@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <style type="text/css">
+      html, body { height: 100%; margin: 0; padding: 0; }
+      #map { height: 75%; }
+      #ui { height: 25%;}
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div id="ui">Kilkniec: <span id="ilosc">0</span></div>
+    <script>
+
+var klikniec = 0;
+var map;
+var markers = [];
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 50.0546501, lng: 19.96250153},
+    zoom: 12
+  });
+  /*var marker = new google.maps.Marker({
+    position: {lat: 50.0546501, lng: 19.96250153},
+    map: map,
+    title: 'Hello World!'
+  });
+  var marker2 = new google.maps.Marker({
+    position: {lat: 50.0646501, lng: 19.97250153},
+    map: map,
+    title: 'Hello World!'
+  });
+  google.maps.event.addDomListener(marker, 'click', function() {
+    window.alert('Marker was clicked!');
+    klikniec++;
+    $("#ilosc").text(klikniec);
+    marker.setMap(null);
+
+  });*/
+
+  // This event listener will call addMarker() when the map is clicked.
+
+  // Adds a marker at the center of the map.
+  var h1 = {lat: 50.0546501, lng: 19.96250153};
+  var h2 = {lat: 50.0646501, lng: 19.97250153};
+
+  addMarker(h1);
+  addMarker(h2);
+  for (var i = 0; i < markers.length; i++) {
+    (function (i){
+    google.maps.event.addDomListener(markers[i], 'click', function() {
+    klikniec++;
+    $("#ilosc").text(klikniec);
+    markers[i].setMap(null);
+  });
+})(i);
+
+  }
+
+
+}
+
+
+
+
+
+// Adds a marker to the map and push to the array.
+function addMarker(location) {
+  var marker = new google.maps.Marker({
+    position: location,
+    map: map
+  });
+  markers.push(marker);
+}
+
+// Sets the map on all markers in the array.
+function setMapOnAll(map) {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(map);
+  }
+}
+
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
+  setMapOnAll(null);
+}
+
+// Shows any markers currently in the array.
+function showMarkers() {
+  setMapOnAll(map);
+}
+
+// Deletes all markers in the array by removing references to them.
+function deleteMarkers() {
+  clearMarkers();
+  markers = [];
+}
+
+
+/*
+  google.maps.event.addDomListener(markers[1], 'click', function() {
+    window.alert('Marker2 was clicked!');
+    klikniec++;
+    $("#ilosc").text(klikniec);
+    marker2.setMap(null);
+
+  });
+
+  */
+//  $( document ).ready(function() {
+
+//});
+
+
+
+
+
+    </script>
+    <script async defer
+      src="https://maps.googleapis.com/maps/api/js?callback=initMap">
+    </script>
+  </body>
+</html>
