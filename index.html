@@ -2,15 +2,29 @@
 <html>
   <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="Accident.js"></script>
+    <script src="AccidentManager.js"></script>
+    <script src="Car.js"></script>
+    <script src="Unit.js"></script>
+    <script src="Skill.js"></script>
+    <script src="Mgr.js"></script>
+    <script src="Phone.js"></script>
     <style type="text/css">
       html, body { height: 100%; margin: 0; padding: 0; }
       #map { height: 75%; }
       #ui { height: 25%;}
     </style>
+
   </head>
   <body>
     <div id="map"></div>
-    <div id="ui">Kilkniec: <span id="ilosc">0</span></div>
+    <div id="ui"><button type="button" id="phoneButton">PHONE!</button></div>
+    
+
+
+    <script>
+    var mgr = new Manager();
+    </script>
     <script>
 
 var klikniec = 0;
@@ -47,16 +61,6 @@ function initMap() {
 
   addMarker(h1);
   addMarker(h2);
-  for (var i = 0; i < markers.length; i++) {
-    (function (i){
-    google.maps.event.addDomListener(markers[i], 'click', function() {
-    klikniec++;
-    $("#ilosc").text(klikniec);
-    markers[i].setMap(null);
-  });
-})(i);
-
-  }
 
 
 }
