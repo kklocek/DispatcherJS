@@ -19,7 +19,7 @@ AccidentManager.prototype.isReadyForNextAccident = function(level) {
 	var r = Math.floor(Math.random()*this.n);
 	if(r == 5 || r == 4)
 		return true;
-	else 
+else 
 		return false;
 };
 
@@ -29,8 +29,13 @@ AccidentManager.prototype.update = function() {
 	}
 
 	for(var i = 0; i < this.accidents.length; i++) {
-		if(this.accidents[i].progress == 100) 
-			this.accidents.splice(i, 1)			
+		if(this.accidents[i].progress == 100) {
+			for (var j = 0; j < this.accidents[i].cars.length; j++) {
+				this.accidents[i].cars[j].state = actionState.COULD RETURN; 
+			}
+			this.accidents[i].cars = null;
+			this.accidents.splice(i, 1);			
+		}
 	}
 
 }

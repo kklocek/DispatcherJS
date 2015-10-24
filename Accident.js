@@ -19,5 +19,10 @@ Accident.prototype.addCars = function(car) {
 }
 
 Accident.prototype.update = function() {
-	
+		var cars = this.cars.filter(function(el)	 {
+			return el.type == this.type.bind(this);
+
+		});
+		
+		progress += cars.length * PROGRESS_RATE;
 }
