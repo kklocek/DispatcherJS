@@ -48,7 +48,18 @@ function initMap() {
   var mgr = new Manager();
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 50.0546501, lng: 19.96250153},
-    zoom: 12
+    zoom: 12,
+    streetViewControl: false,
+    scrollwheel: false,
+    scaleControl: false,
+    rotateControl: false,
+    overviewMapControl: false, //?
+    mapTypeControl: false,
+    keyboardShortcuts: false,
+    draggable: false,
+    disableDoubleClickZoom: true,
+    zoomControl: false
+
   });
   mgr.map = map;
   /*var marker = new google.maps.Marker({

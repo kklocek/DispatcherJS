@@ -8,7 +8,6 @@ function Phone() {
 	};
 
 	this.isRinging = false;
-	//TODO: onClick!
 };
 
 Phone.prototype.addAccident = function(accident) {

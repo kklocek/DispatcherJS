@@ -8,11 +8,13 @@ function Manager() {
 	//this.numberofunits = 9;
 	this.units.push(new Unit("AGHacks", 0, 0, 12));
 	this.units.push(new Unit("Krakow", 1, 1, 19));
-	this.accidentManager = new AccidentManager();
 	this.endGame = false;
 	this.phone = new Phone();
 	this.level = 0;
+
 	this.map = null;
+	this.waitForMap();
+	this.accidentManager = new AccidentManager(map);
 	this.work();
 }
 
@@ -42,3 +44,9 @@ Manager.prototype.work = function() {
 	//var self = this;
 	requestAnimationFrame(this.work.bind(this));
 };
+
+Manager.prototype.waitForMap = function() {
+	if(this.map == null) {
+		requestAnimationFrame(this.waitForMap.bind(this))
+	}
+}
