@@ -1,10 +1,9 @@
 function Phone() {
 	this.accident = null;
-	this.accidents = []
+	this.accidents = [];
 	this.phoneButton = document.getElementById("phoneButton");
-	var self = this;	
 	this.phoneButton.onclick = function() {
-		self.checkState();
+		this.checkState().bind(this);
 	};
 
 	this.isRinging = false;
@@ -26,7 +25,12 @@ Phone.prototype.checkState = function() {
 	if(this.isRinging) {
 		//TODO: Ograniczenie ze za duzo naraz
 		//this.accidents.shift();
-		this.accident = null;
-		this.isRinging = false;
+		var accident = this.accidents.shift();
+		AccidentDialog.show(accident);
+		accident.state = accidentState.WAITING_FOR_ACTION;
+		accident.plot();
+		//this.accident = null;
+		if(this.accident === [] || this.accident == null)
+			this.isRinging = false;
 	}
  }
