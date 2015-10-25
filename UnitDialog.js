@@ -23,6 +23,12 @@ function UnitDialog(){
 }
 
 UnitDialog.prototype.show = function(unit){
+	/*
+	if(this.element.style.display == "inline") {
+		this.outgoing = [];
+		this.closeDialog();
+	}
+	*/
 	this.unit = unit;
 	this.phoneButton.style.display = "none";
 	var self = this;
@@ -39,6 +45,9 @@ UnitDialog.prototype.show = function(unit){
 	}
 	for(var j=0; j<unit.cars.length; j++){
 		(function(j){
+			//if(unit.cars[j].state == accidentState.GOING || unit.cars[j].state == accidentState.WORKING)
+			//	return;
+
 			var e = document.createElement('div');
 			e.onclick = function() {
 				//self.unit.cars[j].state = accidentState.GOING;
@@ -65,9 +74,16 @@ UnitDialog.prototype.closeDialog = function() {
 
 	this.phoneButton.style.display = "inline";
 	this.element.textContent = "Please wait...";
+	/*
+	while(this.skills.firstChild)
+		this.skills.removeChild(this.skills.firstChild);
+	while(this.cars.firstChild)
+		this.cars.removeChild(this.cars.firstChild);
+	*/
 	if(this.outgoing.length == 0) {
 		this.phoneButton.style.display = "none";
-		this.element.textContent = "OK";
+		this.button.textContent = "OK";
+
 		return;
 	}
 
@@ -88,7 +104,7 @@ UnitDialog.prototype.closeDialog = function() {
 	//console.log(status);
     if (status == google.maps.DirectionsStatus.OK) {
     	self.phoneButton.style.display = "inline";
-    	self.element.textContent = "OK!";
+    	self.button.textContent = "OK!";
     	self.element.style.display = "none";
 
     	for(var i = 0; i < self.outgoing.length; i++) {

@@ -25,12 +25,14 @@ AccidentDialog.prototype.show = function(accident){
 	//Renderowanie elementow
 	this.whatRow.textContent = "WHAT: " + this.mapType(accident.type);
 	this.whereRow.textContent = "WHERE: " + accident.x + " " + accident.y;
+	CURRENT_ACCIDENT = accident;
+	accident.state = accidentState.WAITING_FOR_ACTION;
 	//infoRow...
 }
 
 AccidentDialog.prototype.closeDialog = function() {
 	this.element.style.display = "none";
-	this.phoneButton.style.display = "inline";
+	//this.phoneButton.style.display = "inline";
 }
 
 AccidentDialog.prototype.mapType = function(type) {

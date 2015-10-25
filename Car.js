@@ -21,6 +21,7 @@ function Car(type, weight, unit) {
 	this.timer = 0;
 	this.startTime = (new Date().getTime() )/ 1000.0;
 	this.firstTime = true;
+	this.isComingBack = false;
 }
 
 Car.prototype.getSpeedRate = function() {
@@ -44,21 +45,34 @@ Car.prototype.update = function() {
 		this.timer += delta;
 		if(this.timer >= this.dt) {
 			this.destinationIndex += Number.parseInt(this.timer / this.dt);
-			if(this.destinationIndex > this.destination.length - 1) {
+			if(this.destinationIndex >= this.destination.length - 1) {
 				this.destinationIndex = this.destination.length - 1;
-				this.state = actionState.WORKING;
+				this.marker.setMap(null);
+				this.marker = null;
+				if(this.isComingBack) {
+					this.isComingBack = false;
+					this.state = actionState.AVAILABLE;	
+					this.destinationIndex = 0;
+					this.destination = null;
+					return;
+
+				} else {
+					this.state = actionState.WORKING;
+					this.accident.cars.push(this);
+					return;
+				}
 			}
-			console.log(this.destinationIndex);
-			console.log(this.destination.length);
 			this.plot();
-			this.timer = 0;
-			this.startTime = new Date().getTime() / 1000.0;
+			
 		}
 
 	}
 }
 
 Car.prototype.plot = function() {
+	if(this.destination.length == 0)
+		return;
+
 	var map = this.unit.map;
 
 	var self = this;
@@ -66,18 +80,12 @@ Car.prototype.plot = function() {
 		this.marker = new google.maps.Marker({
 		    position: this.destination[0],
 		    map: map,
-		    title: "LOL",
+		    title: "Car",
 		    icon: "assets\\gfx\\markersil.png"
 	  });
 	}
 	else {
 		var pos = new google.maps.LatLng(this.destination[this.destinationIndex].lat(), this.destination[this.destinationIndex].lng());
-		console.log("New position");
-		console.log(pos.lat());
-		console.log(pos.lng());
-		console.log("destination");
-		console.log(this.destination[this.destination.length - 1].lat());
-		console.log(this.destination[this.destination.length - 1].lng());
 		//var pos = this.destination[this.destinationIndex];
 		this.marker.setPosition(pos);
 		//this.marker.setMap(null);
@@ -94,3 +102,16 @@ Car.prototype.plot = function() {
 	}
 
 }
+
+Car.prototype.goHome = function() {
+	this.destinationIndex = 0;
+	this.destination.reverse();
+	this.state = actionState.GOING; 
+	this.accident = null;
+	this.firstTime = true;
+	this.isComingBack = true;
+	this.timer = 0;
+	this.startTime = new Date().getTime() / 1000.0;
+}
+
+				
