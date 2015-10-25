@@ -1,8 +1,24 @@
-#ui {
-  display: inline;
+* {
+  /*font-family: Arial;*/
+  font-family: Verdana;
+	font-size: 100%;
+}
+
+#ui *{
+  /*display: inline;*/
+  float: left; 
+
 
 }
 
+#ui, .uiEl {
+  border-width: 2px;
+  border-style: solid;
+  border-color: black;
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
 #phoneImage {
-  
+
 }

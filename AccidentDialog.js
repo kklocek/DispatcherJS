@@ -7,10 +7,11 @@ function AccidentDialog(){
 	this.phoneButton = document.getElementById("phoneButton");
 	this.button = document.getElementById('accidentDialogButton');
 	var self = this;
+	/*
 	this.button.onclick = function() {
 		self.closeDialog();
 	}
-
+	*/
 	this.types = ["Fire", "Car accident", "Natural disaster", "Medical disaster"];
 
 	this.textContainer.appendChild(this.infoRow);
@@ -20,8 +21,9 @@ function AccidentDialog(){
 }
 
 AccidentDialog.prototype.show = function(accident){
+	points += POINT_RATE_TAKE;
 	accidentDialogDisplayed = true;
-	this.phoneButton.style.display = "none";
+	//this.phoneButton.style.display = "none";
 	this.element.style.display = "block";
 	//Renderowanie elementow
 	this.whatRow.textContent = "WHAT: " + this.mapType(accident.type);

@@ -29,6 +29,7 @@ UnitDialog.prototype.show = function(unit){
 		this.closeDialog();
 	}
 	*/
+	/*
 	if(unitDialogDisplayed) {
 		this.outgoing = [];
 		this.unit = null;
@@ -37,7 +38,7 @@ UnitDialog.prototype.show = function(unit){
 		while(this.cars.firstChild)
 			this.cars.removeChild(this.cars.firstChild);
 
-	}
+	} */
 
 	this.unit = unit;
 	//this.phoneButton.style.display = "none";
@@ -61,8 +62,19 @@ UnitDialog.prototype.show = function(unit){
 				var e = document.createElement('div');
 				e.onclick = function() {
 					//self.unit.cars[j].state = accidentState.GOING;
-					self.outgoing.push(unit.cars[j]);
+					if(e.style.backgroundColor =="blue") {
+						self.outgoing.splice(self.outgoing.indexOf(unit.cars[j]), 1);
+						e.style.backgroundColor = "white";
+						//e.classList.remove("blue");
+						//e.classList.add("white");
+					}
+					else {	
+						self.outgoing.push(unit.cars[j]);
+						e.style.backgroundColor = "blue";
+						//e.classList.add("blue");
+					}
 				}
+
 				var y = document.createElement('img');
 				y.src = unit.cars[j].imagePath;
 				e.appendChild(y);
@@ -72,6 +84,10 @@ UnitDialog.prototype.show = function(unit){
 			
 
 	}
+}
+
+UnitDialog.prototype.markCar = function() {
+
 }
 
 UnitDialog.prototype.closeDialog = function() {
@@ -100,6 +116,19 @@ UnitDialog.prototype.closeDialog = function() {
 	this.button.textContent = "Please wait...";
 	this.button.onclick = null;
 
+	//Sprawdzenie typu
+	var len = this.outgoing.length;
+	var cars = this.outgoing.filter(function(el){
+			return el.type == CURRENT_ACCIDENT.type;
+		});
+	if(cars.length < len) {
+		alert("You have to assign specified cars for this problem, e.g. we don't want to use huge cars against kittens...");
+
+		this.outgoing = [];
+		this.closeDialog();
+		return;
+	}
+
 	//Destynacja - FUJ
 	var self = this;
 	letsWait = true;
@@ -127,10 +156,10 @@ UnitDialog.prototype.closeDialog = function() {
 			self.closeDialog();
 		}
 
-		while(this.skills.firstChild)
-			this.skills.removeChild(this.skills.firstChild);
-		while(this.cars.firstChild)
-			this.cars.removeChild(this.cars.firstChild);
+		while(self.skills.firstChild)
+			self.skills.removeChild(self.skills.firstChild);
+		while(self.cars.firstChild)
+			self.cars.removeChild(self.cars.firstChild);
 
 		self.outgoing = [];
 		CURRENT_ACCIDENT = null;

@@ -13,11 +13,18 @@ function Car(type, weight, unit) {
 	this.x = unit.x;
 	this.y = unit.y;
 	//!
-	this.imagePath = 'assets\\gfx\\markersil.png'
+	this.imagePath = 'assets/gfx/';
+	if(this.weight == carWeights.LIGHT)
+		this.imagePath += 'light.png';
+	else if(this.weight == carWeights.MEDIUM)
+		this.imagePath += 'medium.png';
+	else
+		this.imagePath += 'heavy.png';
+
 	this.marker = null;
 	this.destination = [];
 	this.destinationIndex = 0;
-	this.dt = 9.0 / 60.0;
+	this.dt = 20.0;
 	this.timer = 0;
 	this.startTime = (new Date().getTime() )/ 1000.0;
 	this.firstTime = true;
@@ -57,9 +64,13 @@ Car.prototype.update = function() {
 				this.marker = null;
 				if(this.isComingBack) {
 					this.isComingBack = false;
+					console.log("BEFORE I CAME BACK");
+					console.log(this.unit.cars);
 					this.state = actionState.AVAILABLE;	
 					this.destinationIndex = 0;
 					this.destination = null;
+					console.log("AFTER");
+					console.log(this.unit.cars);
 					return;
 
 				} else {

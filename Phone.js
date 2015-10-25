@@ -2,6 +2,9 @@ function Phone() {
 	this.accident = null;
 	this.accidents = [];
 	this.phoneButton = document.getElementById("phoneButton");
+	this.image = document.createElement("img");
+	this.image.src = 'assets/gfx/phoneButtonIdle.png';
+	this.phoneButton.appendChild(this.image);
 	var self = this;
 	this.phoneButton.onclick = function() {
 		self.checkState();//.bind(this);
@@ -17,12 +20,13 @@ Phone.prototype.addAccident = function(accident) {
 
 Phone.prototype.ring = function() {
 	console.log("RINGING");
-	this.phoneButton.textContent = "RING";
+	//this.phoneButton.textContent = "RING";
+	this.image.src = 'assets/gfx/phoneButtonWaiting.png';
 	this.isRinging = true;
 }
 
 Phone.prototype.checkState = function() {
-	if(this.isRinging) {
+	if(this.isRinging && CURRENT_ACCIDENT == null) {
 		//TODO: Ograniczenie ze za duzo naraz
 		//this.accidents.shift();
 		var accident = this.accidents.shift();
@@ -32,7 +36,8 @@ Phone.prototype.checkState = function() {
 		//this.accident = null;
 		if(this.accidents.length == 0) {
 			this.isRinging = false;
-			this.phoneButton.textContent = "PHONE";
+			//this.phoneButton.textContent = "PHONE";
+			this.image.src = 'assets/gfx/phoneButtonIdle.png';
 		}
 	}
  }

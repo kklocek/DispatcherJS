@@ -7,6 +7,8 @@ var accidentState = {
 };
 
 var ENERGY_RATE = 3;
+var POINT_RATE_PASS = 50;
+var POINT_RATE_TAKE = 10;
 var TIME_TO_RECOVER_ENERGY_RATE = 3; //sekundy
 
 var actionState = {
@@ -19,8 +21,9 @@ var actionState = {
 var eventType = {
 	FIRE: 0,
 	CAR_ACCIDENT: 1,
-	NATURAL_DISASTER: 2,
-	MEDICAL_DISASTER: 3
+	//NATURAL_DISASTER: 2,
+	//MEDICAL_DISASTER: 3,
+	CAT_DISASTER: 2
 };
 
 var carWeights = {

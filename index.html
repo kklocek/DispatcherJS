@@ -23,20 +23,25 @@
   <body>
     <div id="map"></div>
     <div id="ui">
-      <div>
-        <button type="button" id="phoneButton" src="assets/gfx/phoneButtonIdle.png"></button>
-      </div>
-      <div id="accidentDialog" style="display: none">
+      <span id="phoneButton" class="uiEl">
+        <!--<button type="button" id="phoneButton" src="assets/gfx/phoneButtonIdle.png"></button> -->
+
+      </span>
+      <span id="accidentDialog" style="display: none" class="uiEl">
       <!-- -->
-        <button id="accidentDialogButton">OK!</button>
-      </div>
-      <div id="unitDialog" style="display: none">
+        <!--<button id="accidentDialogButton">OK!</button> -->
+      </span>
+      <span id="unitDialog" style="display: none" class="uiEl">
       <!-- -->
         <button id="unitDialogButton">OK!</button>
-      </div>
+      </span>
+      <span id="points" class="uiEl"></span>
+      <span id="countdown" class="uiEl"></span>
 
-    <div id="reportDialog" style="display: none"></div>
+    <!--<div id="reportDialog" style="display: none"></div> -->
     </div>
+    <div id="endGame" style="display:hidden"><p></p><button onclick="location.reload();">TRY AGAIN!</button></div>
+
     
 
     
@@ -51,6 +56,7 @@
     var unitDialogDisplayed = false;
     var accidentDialogDisplayed = false;
     var letsWait = false;
+    var points = 0;
 
     /**************/
     var CURRENT_ACCIDENT = null;
