@@ -20,6 +20,7 @@ function AccidentDialog(){
 }
 
 AccidentDialog.prototype.show = function(accident){
+	accidentDialogDisplayed = true;
 	this.phoneButton.style.display = "none";
 	this.element.style.display = "block";
 	//Renderowanie elementow
@@ -32,7 +33,9 @@ AccidentDialog.prototype.show = function(accident){
 
 AccidentDialog.prototype.closeDialog = function() {
 	this.element.style.display = "none";
-	//this.phoneButton.style.display = "inline";
+	accidentDialogDisplayed = false;
+	if(CURRENT_ACCIDENT == null)
+		this.phoneButton.style.display = "inline";
 }
 
 AccidentDialog.prototype.mapType = function(type) {

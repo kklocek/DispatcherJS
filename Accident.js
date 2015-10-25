@@ -1,5 +1,5 @@
 //rodzaj zdarzenia
-function Accident(type, x, y, info, state, map) {
+function Accident(type, x, y, info, state, map, timeLimit) {
 	this.type = type; 
 	this.x = x;
 	this.y = y;
@@ -10,6 +10,7 @@ function Accident(type, x, y, info, state, map) {
 	this.progress = 0;
 	this.cars = [];
 	this.marker = null;
+	this.timeLimit = timeLimit;
 }
 
 Accident.prototype.plot = function() {

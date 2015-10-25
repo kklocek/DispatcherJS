@@ -36,7 +36,8 @@ Unit.prototype.plot = function() {
   });
 
 	google.maps.event.addDomListener(this.marker, 'click', function() {
-		unitDialog.show(self)
+		if(!unitDialogDisplayed)
+			unitDialog.show(self)
   });
 
 }

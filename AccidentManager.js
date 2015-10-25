@@ -16,7 +16,10 @@ AccidentManager.prototype.makeAccident = function() {
   	var latMin = 5001400000;
   	var randomLat = (Math.floor(Math.random() * (latMax - latMin + 1)) + latMin)/100000000.0;
   	var randomLng = (Math.floor(Math.random() * (lngMax - lngMin + 1)) + lngMin)/100000000.0;
-  	var accident = new Accident(0, randomLat, randomLng,"", 0, map);
+
+	var timeLimit = (Math.floor(Math.random() * (10 - 4 + 1)) + 4);
+
+  	var accident = new Accident(0, randomLat, randomLng,"", 0, map, timeLimit);
 	this.accidents.push(accident);
 	return accident;
 };
@@ -37,9 +40,9 @@ AccidentManager.prototype.update = function() {
 
 	for(var i = 0; i < this.accidents.length; i++) {
 		if(this.accidents[i].progress >= 100) {
-			for (var j = 0; j < this.accidents[i].cars.length; j++) {
-				this.accidents[i].cars[j].goHome();
-			}
+			//for (var j = 0; j < this.accidents[i].cars.length; j++) {
+			//	this.accidents[i].cars[j].goHome();
+			//}
 			//Malo czasu...
 			//this.accidents[i].state = accidentState.WAITING_FOR_REPORT;
 			this.accidents[i].state = accidentState.ENDED;

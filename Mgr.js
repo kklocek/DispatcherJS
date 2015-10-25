@@ -15,11 +15,12 @@ function Manager(map) {
 	c = new Car(eventType.FIRE, carWeights.MEDIUM, unit1)
 	unit1.cars = [c];
 	this.units.push(unit1);
+	/*
 	this.units.push(new Unit("JRG 5", 70, 50.0916211, 19.9198408, this.map,[], []));
 	this.units.push(new Unit("JRG 3", 60, 50.0755796, 19.8873124, this.map,[], []));
 	this.units.push(new Unit("JRG 7", 80, 50.0940787, 19.977011, this.map,[], []));
 	this.units.push(new Unit("JRG 6", 90, 50.0159093, 20.0155131, this.map,[], []));
-
+	*/
 	for(var i = 0; i < this.units.length; i++) {
 		this.units[i].plot();
 	}

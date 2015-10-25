@@ -33,7 +33,13 @@ Car.prototype.sendCar = function(accident) {
 }
 
 Car.prototype.update = function() {
-	if(this.state == actionState.GOING) {
+
+	if(this.state == actionState.WORKING) {
+		if(this.accident.progress >= 100)
+			this.goHome();
+	}
+
+	else if(this.state == actionState.GOING) {
 		if(this.firstTime) {
 			var delta = 0;
 			this.firstTime = false;

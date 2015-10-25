@@ -29,8 +29,18 @@ UnitDialog.prototype.show = function(unit){
 		this.closeDialog();
 	}
 	*/
+	if(unitDialogDisplayed) {
+		this.outgoing = [];
+		this.unit = null;
+		while(this.skills.firstChild)
+			this.skills.removeChild(this.skills.firstChild);
+		while(this.cars.firstChild)
+			this.cars.removeChild(this.cars.firstChild);
+
+	}
+
 	this.unit = unit;
-	this.phoneButton.style.display = "none";
+	//this.phoneButton.style.display = "none";
 	var self = this;
 	this.element.style.display = "block";
 	//Renderowanie elementow
@@ -47,63 +57,62 @@ UnitDialog.prototype.show = function(unit){
 		(function(j){
 			//if(unit.cars[j].state == accidentState.GOING || unit.cars[j].state == accidentState.WORKING)
 			//	return;
-
-			var e = document.createElement('div');
-			e.onclick = function() {
-				//self.unit.cars[j].state = accidentState.GOING;
-				self.outgoing.push(unit.cars[j]);
+			if(self.unit.cars[j].state != accidentState.GOING && self.unit.cars[j].state != accidentState.WORKING) {
+				var e = document.createElement('div');
+				e.onclick = function() {
+					//self.unit.cars[j].state = accidentState.GOING;
+					self.outgoing.push(unit.cars[j]);
+				}
+				var y = document.createElement('img');
+				y.src = unit.cars[j].imagePath;
+				e.appendChild(y);
+				self.cars.appendChild(e);
 			}
-			var y = document.createElement('img');
-			y.src = unit.cars[j].imagePath;
-			e.appendChild(y);
-			self.cars.appendChild(e);
 		})(j);
 			
 
 	}
-
-/*
-	this.textContainer.appendChild(this.energyBar);
-	this.textContainer.appendChild(this.organizationBar);
-	this.textContainer.appendChild(this.skills);
-	this.textContainer.appendChild(this.cars);
-	this.element.appendChild(this.textContainer); */
 }
 
 UnitDialog.prototype.closeDialog = function() {
 
-	this.phoneButton.style.display = "inline";
-	this.element.textContent = "Please wait...";
+	//this.phoneButton.style.display = "inline";
+
+
 	/*
 	while(this.skills.firstChild)
 		this.skills.removeChild(this.skills.firstChild);
 	while(this.cars.firstChild)
 		this.cars.removeChild(this.cars.firstChild);
 	*/
-	if(this.outgoing.length == 0) {
-		this.phoneButton.style.display = "none";
-		this.button.textContent = "OK";
-
+	
+	if(this.outgoing.length == 0 || CURRENT_ACCIDENT == null) {
+		//this.phoneButton.style.display = "none";
+		this.unit = null;
+		unitDialogDisplayed = false;
+		while(this.skills.firstChild)
+			this.skills.removeChild(this.skills.firstChild);
+		while(this.cars.firstChild)
+			this.cars.removeChild(this.cars.firstChild);
 		return;
 	}
 
+	this.button.textContent = "Please wait...";
+	this.button.onclick = null;
+
 	//Destynacja - FUJ
 	var self = this;
+	letsWait = true;
 	var request = {
 		origin: new google.maps.LatLng(self.unit.x , self.unit.y),
 		destination: new google.maps.LatLng(CURRENT_ACCIDENT.x, CURRENT_ACCIDENT.y),
-		//origin: {lat: self.unit.x , lng: self.unit.y},
-		//dest: {lat: CURRENT_ACCIDENT.x, lng: CURRENT_ACCIDENT.y},
 		travelMode: google.maps.TravelMode.DRIVING
 	};
-	//console.log("REQUEST");
-	//console.log(request);
+
 	directionsService.route(request, function(response, status) {
-	//console.log("JUHU!!!");
-	console.log(response);
-	//console.log(status);
+
     if (status == google.maps.DirectionsStatus.OK) {
-    	self.phoneButton.style.display = "inline";
+    	//self.phoneButton.style.display = "inline";
     	self.button.textContent = "OK!";
     	self.element.style.display = "none";
 
@@ -112,32 +121,22 @@ UnitDialog.prototype.closeDialog = function() {
 			self.outgoing[i].destination = response.routes[0].overview_path;
 			self.outgoing[i].destination.push(new google.maps.LatLng(CURRENT_ACCIDENT.x, CURRENT_ACCIDENT.y));
 			self.outgoing[i].accident = CURRENT_ACCIDENT;
-			//Jeszcze destynacja
 		}
-		console.log(self.outgoing);
-		//directionsDisplay.setDirections(response);
+
+		self.button.onclick = function() {
+			self.closeDialog();
+		}
+
+		while(this.skills.firstChild)
+			this.skills.removeChild(this.skills.firstChild);
+		while(this.cars.firstChild)
+			this.cars.removeChild(this.cars.firstChild);
 
 		self.outgoing = [];
 		CURRENT_ACCIDENT = null;
 		self.unit = null;
-      //var warnings = document.getElementById("warnings_panel");
-      //console.log(warnings);
-      //console.log(response);
-      //directionsDisplay.setDirections(response);
-      //showSteps(response);
+		unitDialogDisplayed = false;
+		letsWait = false;
     }
   });
-	/*
-	for(var i = 0; i < this.outgoing.length; i++) {
-		this.outgoing[i].state = accidentState.GOING;
-
-		//Jeszcze destynacja
-	}
-	console.log("outgoing");
-	console.log(this.outgoing);
-	this.outgoing = [];
-	CURRENT_ACCIDENT = null;
-	this.unit = null;
-	*/
-	//this.element.removeChild()
 }
